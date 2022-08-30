@@ -1,48 +1,67 @@
-class node:
-    def __init__(s,x):
-        s.data = x
-        s.prev = None
-        s.next = None
-        
-class DLL:
-    def __init__(s):
-        s.head = None
-        
-    def insertFront(s,x):
-            new_node = node(x)
-            if s.head != None:
-                new_node.next = s.head
-                s.head.prev = new_node
-            s.head = new_node
-    def display(s):
-        if s.head == None:
-            print("Empty list")
-            return
-        t = s.head
-        while t != None:
-            print(t.data,end="-->")
-            t = t.next
-        print("None")
-    def delete(s,x):
-        t = s.head
-        while t != None and t.data != x:
-            t = t.next
-        if t == None:
-            print("Value not found")
-            return
-        if s.head.data == x:
-            s.head = s.head.next 
-            s.head.prev = None
-        return
-        t.prev.next = t.next
-        t.next.prev = t.prev
-            
-list1 = DLL()
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.previous = self
+        self.next = self
 
-list1.insertFront(50)
-list1.insertFront(40)
-list1.insertFront(30)
-list1.insertFront(20)
-list1.display()
-list1.delete(100)
-list1.display()
+
+class DoublyCircularLinkedList:
+    def __init__(self):
+        self.head = None
+        self.count = 0
+
+    def add_at_tail(self, data) -> bool:
+        # Write code here
+
+    def add_at_head(self, data) -> bool:
+        # Write code here
+
+    def add_at_index(self, index, data) -> bool:
+        # Write code here
+
+    def get(self, index) -> int:
+        # Write code here
+
+    def delete_at_index(self, index) -> bool:
+        # Write code here
+
+    def get_previous_next(self, index) -> list:
+        # Write code here
+
+
+# Do not change the following code
+operations = []
+for specific_operation in input().split(','):
+    operations.append(specific_operation.strip())
+input_data = input()
+data = []
+iteration_count = 0
+
+for item in input_data.split(', '):
+    inner_list = []
+    if item.isnumeric():
+        data.append(int(item))
+    elif item.startswith('['):
+        item = item[1:-1]
+        for letter in item.split(','):
+            if letter.isnumeric():
+                inner_list.append(int(letter))
+        data.append(inner_list)
+
+obj = DoublyCircularLinkedList()
+result = []
+for i in range(len(operations)):
+    if operations[i] == "add_at_head":
+        result.append(obj.add_at_head(data[i]))
+    elif operations[i] == "add_at_tail":
+        result.append(obj.add_at_tail(data[i]))
+    elif operations[i] == "add_at_index":
+        result.append(obj.add_at_index(int(data[i][0]), data[i][1]))
+    elif operations[i] == "get":
+        result.append(obj.get(data[i]))
+    elif operations[i] == "get_previous_next":
+        result.append(obj.get_previous_next(data[i]))
+    elif operations[i] == 'delete_at_index':
+        result.append(obj.delete_at_index(data[i]))
+
+print(result)
